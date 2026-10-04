@@ -1,0 +1,35 @@
+import { Header } from "./components/Header";
+import { Hero } from "./components/Hero";
+import { Highlights } from "./components/Highlights";
+import { MenuSection } from "./components/MenuSection";
+import { BuildYourOrder } from "./components/BuildYourOrder";
+import { Footer } from "./components/Footer";
+import { CartBar } from "./components/CartBar";
+import { WhatsAppFab } from "./components/WhatsAppFab";
+import { useCart } from "./hooks/useCart";
+
+export default function App() {
+  const { lines, addItem, removeItem, clear, totalItems, totalPrice, checkoutUrl } = useCart();
+
+  return (
+    <div className="min-h-screen bg-brand-purple-dark font-body">
+      <Header />
+      <main>
+        <Hero />
+        <Highlights />
+        <MenuSection addItem={addItem} />
+        <BuildYourOrder addItem={addItem} />
+      </main>
+      <Footer />
+      <WhatsAppFab hidden={totalItems > 0} />
+      <CartBar
+        lines={lines}
+        totalItems={totalItems}
+        totalPrice={totalPrice}
+        checkoutUrl={checkoutUrl}
+        removeItem={removeItem}
+        clear={clear}
+      />
+    </div>
+  );
+}
